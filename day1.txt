@@ -1,0 +1,46 @@
+DAY 1 - GitHub Copilot basics, login, inline suggestions, modes  
+
+------------------------------------------------------------------------------------------
+
+PART A - intro 
+1. Copilot = AI pair programmer inside VS Code
+2. 4 things we will learn: inline suggestions, inline chat, chat window, agents
+3. Golden rule: Copilot suggests, YOU review. Never paste passwords, keys, customer data.
+
+PART B - login and open chat window 
+1. Open VS Code (latest version)
+2. Click Accounts icon (bottom left) > Sign in with GitHub > Allow
+3. Copilot logo at bottom right = active
+4. Open chat window: ctrl+alt+i   (or click Copilot icon at top)
+5. Show the chat window parts:
+   - mode picker (Ask / Edit / Agent / Plan)
+   - model picker
+   - new chat (+) and history
+   - add context button
+
+PART C - inline suggestions 
+create folder day1-demo and file index.js
+
+1. inline suggestions (fresh code)
+   write:  function factorial(n){
+   wait... grey text appears > press TAB to accept, ESC to reject
+   press alt+] for next suggestion
+
+2. inline suggestions (incomplete work)
+   open already created project, start writing half code in a function
+   it will suggest code depending on the code above
+
+3. inline chat code generation
+   press ctrl+I in the editor
+   prompt: write code to find factorial of a number
+   click Accept / Discard
+
+4. how to stop inline suggestion
+   click on copilot logo at right bottom > disable (enable again later)
+
+PART D - modes
+1. Ask   = question / prompt, explanation, no file changes
+2. Plan  = big task / big feature, gives steps first, asks questions
+3. Agent = does the work: edits files, runs commands (asks your approval)
+
+
