@@ -44,3 +44,29 @@ PART D - modes
 3. Agent = does the work: edits files, runs commands (asks your approval)
 
 
+-------------------------------------------------------------------------
+prompt
+---
+Create a modern responsive Student Placement Preparation Tracker using HTML, 
+CSS and JavaScript. Use Local Storage as the database. 
+Create separate pages for Dashboard, Preparation, Companies, Skills and Analytics...
+---
+
+ask mode 
+
+---
+Analyze the existing project structure and explain how the data is 
+currently stored in Local Storage. Do not modify any files.
+---
+
+agent mode
+---
+Add a new **Coding Practice** page to my existing Student Placement 
+Preparation Tracker using HTML, CSS, and JavaScript. 
+Integrate an online compiler for **JavaScript, Python, Java, 
+and SQL**, allowing users to select a language using buttons,
+write and edit code in a code editor, execute code, and view output 
+or errors. Maintain the existing modern, responsive UI 
+and use Local Storage to save code snippets and practice progress. 
+Integrate a suitable code execution API if required.
+----

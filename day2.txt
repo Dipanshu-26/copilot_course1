@@ -1,0 +1,41 @@
+PART A - sessions 
+1. session = one chat conversation
+2. Copilot only sees: this conversation + the context you give it
+3. problem: long chat gets confused, old instructions mix with new
+4. rule: ONE TASK = ONE SESSION
+5. new session: click + in chat header (or ctrl+L)
+6. old sessions: click history icon in chat
+7. different sessions in same project, example: "Colors", "Bug fix", "Docs"
+
+PART B - how context is selected 
+1. automatic: active file and selected code
+2. manual: Add Context button
+3. type # in chat: #file, #selection, #codebase
+4. type @workspace to ask about whole project
+5. drag file from Explorer into chat
+6. always look at the context chips above the prompt box before pressing send
+
+PART C - live demo 
+1. open NEW chat. do not add any file. prompt:
+     change the basic colors
+   see result: random or confusing
+2. open another NEW chat. add css/styles.css as context. prompt:
+     In #file:css/styles.css change primary color to teal #0f766e and background to #f8fafc.
+     Keep text readable. Edit only the CSS variables or color values.
+3. compare: vague prompt vs clear prompt + context
+
+HOME TASK: open 2 sessions, one for colors and one for fonts. check history.
+CHECK: learner can start new chat, add #file, explain "one task one session".
+
+------------------------------------------------------------------------
+prompt to add new feature
+---
+Add a new LinkedIn Job Search feature to my existing application. 
+Allow users to search jobs using different keywords 
+(e.g., Software Developer, QA Engineer, React Developer, Data Analyst). 
+Display relevant job listings with job title, company name, location, 
+and a clickable link to the LinkedIn job posting. Add a search bar, 
+keyword filters, and a clean, responsive UI. Integrate with the existing 
+app without modifying current features. Use official or permitted data 
+sources and avoid scraping LinkedIn.
+---
