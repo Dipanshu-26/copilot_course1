@@ -1,0 +1,10 @@
+how context is selected (10 min)
+1. automatic: active file and selected code
+2. manual: Add Context button
+3. type # in chat: #file, #selection, #codebase
+4. type @workspace to ask about whole project
+5. drag file from Explorer into chat
+6. always look at the context chips above the prompt box before pressing send
+
+Task 
+add refersh button to jobs page so that whenever i refershit it will fatch latest jobs
