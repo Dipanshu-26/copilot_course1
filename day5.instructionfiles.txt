@@ -1,0 +1,91 @@
+DAY 9 - Types of instructions + create copilot-instructions.md with Copilot   
+------------------------------------------------------------------------------------------
+ 
+PART A - types of instructions 
+1. Personal instructions      - your own settings, used in all your projects
+2. Repository instructions    - .github/copilot-instructions.md  (always used in THIS project)
+3. Path-specific instructions - .github/instructions/NAME.instructions.md (only for matching files, Day 10)
+4. AGENTS.md                  - root file, also read by other AI tools
+5. Rule: instructions = rules that ALWAYS apply. Keep them short and specific.
+   (project facts go in a project brief on Day 11, not here)
+ 
+PART B - setup 
+1. VS Code > File > Open Folder > create a NEW empty folder named  expense-pro  > open it
+   (this is the real project from today to Day 25)
+2. Open chat: ctrl+alt+i
+3. Mode picker > choose AGENT mode  (Agent mode can create the file for you; Ask mode only shows text)
+4. Click + for a NEW chat (one task = one session)
+5. Do NOT add any file as context - the folder is empty
+ 
+PART C - generate the file with this prompt 
+Copy and paste exactly:
+ 
+--- PROMPT START ---
+Create the file .github/copilot-instructions.md for a new project.
+ 
+Project: Smart Expense Tracker, a web app where a user records daily expenses and sees monthly totals.
+Tech: HTML, CSS and vanilla JavaScript (ES modules). No frameworks unless I ask. Data is saved in
+localStorage now; a database comes later.
+Planned structure: index.html, css/styles.css, js/app.js (UI), js/storage.js (data access),
+js/utils.js (pure logic), tests/ (Vitest tests).
+ 
+Write short rules (maximum 20 lines, bullet points) covering:
+1. Tech stack and what not to use
+2. File responsibilities (which code goes in which file)
+3. Coding style (const/let, small functions, JSDoc on exported functions)
+4. Accessibility (label on every input, WCAG AA colour contrast)
+5. Money handling (format with Intl.NumberFormat)
+6. Testing (update tests in tests/ when logic in utils.js changes)
+Rules must be clear, specific and checkable. No general advice like "write clean code".
+Create only this one file.
+--- PROMPT END ---
+ 
+1. Press Enter
+2. If an approval popup appears (create file), read it, click Allow/Continue
+3. Open Explorer: .github > copilot-instructions.md should exist
+   If it is in the wrong place, drag it into a .github folder at the ROOT of expense-pro
+ 
+(Why we describe the project in the prompt: the folder is empty, so Copilot cannot read any code.
+ On an existing project you can instead ask: "Analyze this codebase and generate
+ .github/copilot-instructions.md". Some VS Code versions also have a "Generate instructions" option
+ in the chat settings gear menu - optional.)
+ 
+PART D - review and trim  - NEVER keep AI output without reading it
+1. Read every line. Delete or fix anything that is wrong, vague or too long.
+2. Target: under 20 lines. Every line must be something you can check.
+3. Compare with this reference version:
+ 
+# Project: Smart Expense Tracker
+- Vanilla HTML/CSS/JS with ES modules. No frameworks unless asked.
+- UI code in js/app.js, data access in js/storage.js, pure logic in js/utils.js.
+- Use const/let, small functions, JSDoc on exported functions.
+- Every form field needs a label. Keep colour contrast at WCAG AA.
+- Format money with Intl.NumberFormat.
+- When logic in utils.js changes, update tests in tests/.
+ 
+4. Save the file (ctrl+S)
+ 
+PART E - test that Copilot follows it 
+1. NEW chat (+), Agent mode
+2. Ask:   What rules do you follow in this project?
+   Expected: it lists your rules. Look under the answer for "References": copilot-instructions.md
+3. NEW chat, Agent mode. Prompt:
+     Create js/utils.js with a function formatMoney(amount) that returns money as text.
+4. CHECK the result against your rules:
+   [ ] file is js/utils.js
+   [ ] uses Intl.NumberFormat
+   [ ] has a JSDoc comment
+   [ ] uses const/let, no var
+5. Pass = at least 3 of 4 ticked. If not, see problems below.
+ 
+IF IT DOES NOT WORK
+1. File must be exactly  .github/copilot-instructions.md  (check spelling) at the project root
+2. VS Code settings (ctrl+,) > search "instruction files" > make sure using instruction files is ON
+3. Open a NEW chat - old chats may not pick up a new file
+4. Rule too vague? Rewrite it as something checkable
+ 
+HOME TASK: add one rule of your own to the file (example: "Dates are stored as YYYY-MM-DD"),
+then ask Copilot to write a function that uses dates and check that it follows the rule.
+ 
+CHECK: copilot-instructions.md exists, is under 20 lines, and Copilot's formatMoney follows it.
+ 

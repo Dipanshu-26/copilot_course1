@@ -1,0 +1,45 @@
+take ask and plan mode again 
+
+-- learn simple browser available in vs code 
+
+----------------------------------------------------------------------------------------------
+--you are searching for “simple browser”, but in the latest VS Code versions, Simple Browser has been replaced by the newer Integrated Browser. The current command is:
+
+Browser: Open Integrated Browser
+
+Press Ctrl + Shift + P
+or  -- go to vs code settings-->command pallate -->
+
+Search:
+Browser: Open Integrated Browser -->Select it.
+
+You can also use: View → Browser
+
+or the shortcut Ctrl + Alt + / on Windows.
+
+and pest url of your web application and click on enter 
+http://127.0.0.1:5500/
+
+you can see web application in vs code window 
+------------------------------------------------------------------------------------------
+
+-- now we can add element to chat window 
+
+-- click on add element at upper right (arrow in square logo like in inspect element) 
+-- click on it
+-- as soon as you click on it it will be added in conetxt of chat window 
+-- and give somoe changes to it like 
+"change the you ad Dipanshu"
+-- and it will be done 
+
+-----------------------------------------------------------------------------------------------
+explain context again 
+-- why we do not give entire code base to chat coz it has context limitation so we select 
+perticulare section/file code  in the context window 
+
+-----
+
+prompt
+remove both The Refresh listings button is in linkedin-jobs.html. 
+Its click handler and loading-state logic are in linkedin-jobs.js 
+remove only buttion and its logic not list of jobs under see all resumt on Linkdin
