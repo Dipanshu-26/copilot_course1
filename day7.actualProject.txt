@@ -1,0 +1,147 @@
+DAY 11 - Project brief + actual project prompt (build expense-pro)   
+Time plan: 6 brief | 6 plan | 12 build | 6 run and test (Option B and comparison = extra)
+------------------------------------------------------------------------------------------
+Project start order:  1 instructions (Day 9-10)  >  2 PROJECT BRIEF (today)  >  3 PLAN  >  4 BUILD
+TRAINER TIP: run this day once before class. If the build is slow in class, use your pre-built copy
+for the last 6 minutes and still show the prompts.
+ 
+PART A - project brief file (6 min)   step 2 of project start
+1. in expense-pro create folder docs and file docs/PROJECT_BRIEF.md
+2. paste and save:
+ 
+# Smart Expense Tracker
+Purpose: help a person record daily expenses and see monthly totals.
+Users: individuals, desktop first, also mobile.
+Categories: Food, Travel, Bills, Shopping, Other.
+Features: add expense (amount, category, date, note), list with delete, month filter,
+total and per-category summary.
+Out of scope: login, database, charts (added in later days).
+ 
+3.for explanation :
+   instruction file = RULES, always on       (how to write code)
+   project brief    = FACTS about this app   (what to build) - you attach it when needed
+ 
+PART B - plan, then build 
+ 
+STEP 1 - plan with Plan mode 
+1. new chat (+), choose ASK mode
+2. drag docs/PROJECT_BRIEF.md from Explorer into the chat box (check the file chip)
+3. paste this prompt:
+ 
+--- PROMPT START ---
+Using this project brief, plan the project: folder and file structure, the expense data model,
+the functions in each file, a test plan, and numbered build steps.
+Ask me questions if anything is unclear. Do not write code yet.
+--- PROMPT END ---
+ 
+4. answer any questions it asks (short answers)
+5. review the plan - tick all four:
+   [ ] has index.html, css/styles.css, js/app.js, js/storage.js, js/utils.js, tests/
+   [ ] utils.js has calculateTotal, groupByCategory, filterByMonth
+   [ ] nothing from "out of scope" (no login, no database, no charts)
+   [ ] has a test plan
+   if not: reply "Remove X" or "Add Y" and let it update the plan
+6. SAVE the plan: select the whole plan text > copy > create docs/BUILD_PLAN.md > paste > save
+   (a NEW chat does not remember this chat, so the plan must be a file)
+ 
+STEP 2 - build with Agent mode (12 min)
+1. new chat (+), choose AGENT mode
+2. drag docs/PROJECT_BRIEF.md and docs/BUILD_PLAN.md into the chat box
+3. paste this prompt:
+ 
+--- PROMPT START ---
+Build the project from the attached brief and plan.
+Create or update: index.html, css/styles.css, js/app.js (UI), js/storage.js (localStorage only),
+js/utils.js (calculateTotal, groupByCategory, filterByMonth), package.json with Vitest and a
+test script, tests/utils.test.js.
+Keep the existing formatMoney in js/utils.js and the .expense-card style in css/styles.css.
+Follow the project instructions. Work step by step.
+At the end tell me the exact commands to install, test and run.
+--- PROMPT END ---
+ 
+4. while it works, teach (same as Day 4):
+   - read every approval popup before clicking Allow
+   - click each changed file to see the diff
+   - Keep = accept, Undo = reject
+5. when done, click Keep for all files
+ 
+PART C - run, test and verify 
+BEFORE CLASS: Node.js LTS must be installed on every machine. In the terminal run  node -v  and  npm -v
+              both must print a version. If not: install Node.js LTS from nodejs.org, restart VS Code.
+ 
+STEP 1 - open the terminal in the project folder 
+1. press ctrl+`  (backtick) to open the terminal
+2. type  ls  (or  dir  in Command Prompt) and press Enter
+3. you must see package.json in the list
+   if not: File > Open Folder > select expense-pro, then open the terminal again
+ 
+STEP 2 - install and run the tests    needs internet
+1. type:  npm install        wait until it finishes (node_modules folder appears) - runs only once
+2. type:  npm test           expected: all tests passed (green)
+3. if the test command keeps waiting for changes, press q, then in package.json change the
+   test script to  "test": "vitest run"  and run  npm test  again
+ 
+STEP 3 - start the app 
+1. type:  npx serve
+2. first time it asks "Ok to proceed?"  > type y and press Enter
+3. copy the link shown (example http://localhost:3000)
+4. ctrl+shift+P > Browser: Open Integrated Browser > paste the link
+   (do not double-click index.html: ES modules need a server)
+5. leave this terminal running; to stop the server press ctrl+C; use the + icon for a second terminal
+ 
+STEP 4 - test in the browser 
+   [ ] add 3 expenses
+   [ ] refresh page - data still there
+   [ ] filter by month - list and totals change
+   [ ] delete one expense
+   [ ] empty list shows a message
+ 
+----------------------------------------------------------------------------------------------
+Optional
+---------- 
+OPTION B - let Copilot do the setup (shows tool approvals)
+1. new chat (+), AGENT mode, paste:
+ 
+--- PROMPT START ---
+Set up and verify this project. Run these steps one at a time in the terminal:
+1. Check that Node.js and npm are installed (node -v, npm -v).
+2. Run npm install.
+3. Run npm test once. If the test script uses watch mode, change it to "vitest run" in package.json so it exits.
+4. Start the app with npx serve and tell me the localhost link.
+After each step tell me in one line whether it passed. If a step fails, explain the error and
+propose a fix before changing anything. Do not change any source code.
+--- PROMPT END ---
+ 
+2. for EVERY approval popup: read the command aloud, ask "is this what I expected?", then Allow
+   anything unexpected (rm, curl piped to bash, installing a package nobody asked for) > press Skip
+3. npx serve keeps running and may block the chat - copy the link and carry on
+4. do not trust "all tests passed" - look at the terminal output yourself
+ 
+CHECK THE INSTRUCTION FILES WERE FOLLOWED
+   [ ] js/utils.js functions have JSDoc
+   [ ] css uses variables in :root, one 600px breakpoint, no !important
+   [ ] every input has a label
+ 
+COMPARE WITH DAY 4 (write on board)
+                      Day 4 (no instructions)   Day 11 (instructions + brief + plan)
+   prompt length      long and detailed         short, files attached
+   structure          ?                         ?
+   followed rules     ?                         ?
+   tests              ?                         ?
+ 
+IF IT DOES NOT WORK
+0. npm or node "not recognized": Node.js is not installed, or VS Code was not restarted after installing
+   Windows PowerShell "running scripts is disabled": switch terminal to Command Prompt (dropdown next to +)
+   port already in use: npx serve -l 3001
+   npm install fails: no internet or blocked network - use your pre-built copy for the demo
+1. npm test fails: new chat, Agent mode, paste the error:
+     npm test fails with this error: <paste>. Find the cause and fix the code.
+     Do not change the test unless the test itself is wrong.
+2. browser shows blank page: open browser console (F12), copy the red error, ask Copilot to fix it
+3. Agent stopped halfway: new chat, attach the plan, say "Continue from step N of the plan"
+4. it ignored the rules: check .github/copilot-instructions.md is still named correctly (Day 9 steps)
+5. it overwrote formatMoney: press Undo for that file and repeat with "Keep formatMoney" in the prompt
+ 
+HOME TASK: write 2 things Copilot did wrong or missed and the prompt you would use to fix each.
+ 
+CHECK: expense-pro runs, npm test passes, learner can name the 4 steps of a project start.
