@@ -1,0 +1,165 @@
+
+PART A - recap    project: expense-pro
+1. instructions = always on, rules for how to code | context file = you attach it for ONE task
+2. 3 ways to add a file to chat (show each once):
+   a. drag from Explorer into the chat box  (today's main way)
+   b. type #file:docs/DATA_FORMAT.md in the prompt
+   c. Add Context button (paperclip/+) > Files
+3. always look for the file chip above the prompt box before pressing Enter
+4. attach only what the task needs - 2 or 3 files, not the whole project
+ 
+PART B - create the 2 context files with Copilot 
+Both files are written by Copilot, then CHECKED and corrected by you. Never keep AI output unread.
+ 
+STEP 1 - create docs/DATA_FORMAT.md 
+1. new chat (+), choose AGENT mode (it can create the file)
+2. do NOT attach anything: Copilot reads the code itself
+3. paste this prompt:
+ 
+--- PROMPT START ---
+Read js/storage.js, js/app.js and js/utils.js and create docs/DATA_FORMAT.md describing the
+expense data used in this app.
+ 
+Include:
+1. The expense object: every field name, its type and an example value. Use the exact field names from the code.
+2. The allowed categories, as defined in the code.
+3. How dates are stored (format).
+4. Where data is stored (the localStorage key name).
+5. A section "CSV export" with exactly these rules:
+   - columns in this order: date, category, amount, note
+   - first line is a header row
+   - amount with 2 decimals (example 250.00)
+   - a note containing a comma or a double quote is wrapped in double quotes
+   - file name: expenses-YYYY-MM.csv (month of the filtered list)
+   - export only the currently filtered expenses
+ 
+Keep the file under 30 lines. Do not invent fields that are not in the code.
+Do not change any code. Create only this one file.
+--- PROMPT END ---
+ 
+4. approve the create-file popup, open docs/DATA_FORMAT.md
+5. CHECK (never skip):
+   [ ] ctrl+shift+F search each field name it wrote - every one exists in the code
+   [ ] localStorage key name matches the code
+   [ ] categories match the app
+   [ ] CSV section has all 6 rules (Copilot sometimes drops one)
+   [ ] no invented fields
+6. fix by hand what is wrong, save (ctrl+S)
+ 
+STEP 2 - create docs/ACCEPTANCE.md 
+1. new chat (+), AGENT mode
+2. drag docs/PROJECT_BRIEF.md into the chat box (the checklist comes from the brief)
+3. paste this prompt:
+ 
+--- PROMPT START ---
+Using the attached PROJECT_BRIEF.md, create docs/ACCEPTANCE.md: an acceptance checklist for this app.
+ 
+Rules:
+- 8 to 10 lines, each a markdown checkbox (- [ ] ...)
+- each line must be testable by a person in under 1 minute in the browser, with a clear pass or fail
+- cover: every input and button has a visible label or accessible name; amount must be greater than 0
+  and an empty amount shows an error message; month filter works; totals match the visible list for
+  the selected month; data is still there after page refresh; empty list shows a friendly message;
+  delete works; works at 600px width with no horizontal scrolling; CSV export contains only the
+  filtered expenses
+- no vague lines like "app looks good" or "works well"
+Do not change any code. Create only this one file.
+--- PROMPT END ---
+ 
+4. approve, open docs/ACCEPTANCE.md
+5. CHECK (never skip):
+   [ ] 8 to 10 lines, each starts with - [ ]
+   [ ] every line has a clear PASS or FAIL (can you test it in 1 minute?)
+   [ ] no vague line - rewrite it or delete it
+   [ ] nothing outside the brief (no login, no database, no charts)
+6. save (ctrl+S)
+ 
+STEP 3 - why we asked Copilot to write them (1 min)
+1. DATA_FORMAT.md describes what already exists in code - Copilot reads the code, you verify
+2. ACCEPTANCE.md describes what "done" means - Copilot drafts from the brief, you decide
+3. the CSV rules in DATA_FORMAT.md are decisions that are not in the code yet, so we typed them in the prompt
+ 
+IF YOU WANT TO TYPE THE FILES BY HAND (fallback if Agent mode is slow)
+DATA_FORMAT.md:
+  # Data format
+  expense = { id, amount, category, spentOn (YYYY-MM-DD), note }
+  categories = Food, Travel, Bills, Shopping, Other
+  ## CSV export  (same 6 rules as in the prompt above)
+ACCEPTANCE.md:
+  # Acceptance checklist
+  - [ ] every input and button has a visible label or accessible name
+  - [ ] amount must be greater than 0; empty amount shows an error message
+  - [ ] totals match the visible list for the selected month
+  - [ ] works at 600px width with no horizontal scrolling
+  - [ ] data is still there after page refresh
+  - [ ] empty list shows a friendly message
+  - [ ] CSV export contains only the filtered expenses
+Use YOUR real field names (ctrl+shift+F to check).
+ 
+PART C - use them 
+ 
+STEP 1 - build CSV export with context 
+1. new chat (+), AGENT mode
+2. drag docs/PROJECT_BRIEF.md and docs/DATA_FORMAT.md from Explorer into the chat box
+3. check: two file chips are shown. Do NOT attach code files, Agent finds them itself.
+4. paste this prompt:
+ 
+--- PROMPT START ---
+Add a "Download CSV" button that exports the currently filtered expenses (the month selected in
+the filter). Follow the attached DATA_FORMAT.md for the columns and the file name.
+Put the CSV-building logic in js/utils.js as a pure function and the click handling in js/app.js.
+Add tests for the CSV function in tests/utils.test.js. Keep all existing features working.
+--- PROMPT END ---
+ 
+5. approve, then click Keep for the changed files
+6. terminal: npm test      > must pass
+7. in the browser (npx serve running):
+   - add an expense with note:  Lunch, office     (has a comma)
+   - select the month, click Download CSV
+   - open the downloaded file in VS Code and check against DATA_FORMAT.md:
+     [ ] columns in the right order, header row present
+     [ ] amount has 2 decimals
+     [ ] the note with a comma is in double quotes
+     [ ] file name is expenses-YYYY-MM.csv
+     [ ] only the filtered month is exported
+   (if the download is blocked in the Integrated Browser, open the same link in Chrome or Edge)
+ 
+STEP 2 - review against the acceptance file 
+1. new chat (+), choose ASK mode (nothing can be changed)
+2. drag docs/ACCEPTANCE.md into the chat box
+3. paste:
+ 
+--- PROMPT START ---
+Review the app against the attached acceptance checklist. For each line answer PASS or FAIL,
+with the file and a one-line reason. Do not change any code.
+--- PROMPT END ---
+ 
+4. do NOT trust the table blindly: pick ONE line and verify it yourself in the browser
+   (example: resize the browser panel to 600px, or enter amount 0)
+ 
+STEP 3 - fix one failure 
+1. choose ONE line marked FAIL (if all PASS, pick the one you doubt most and test it)
+2. new chat (+), AGENT mode, drag docs/ACCEPTANCE.md, paste (put the failing line in place of <...>):
+ 
+--- PROMPT START ---
+Fix only this failing item from the attached checklist: <paste the failing line here>.
+Change as little code as possible. Then run npm test and tell me the result.
+--- PROMPT END ---
+ 
+3. test again in the browser, then smart-commit later (Day 13)
+ 
+IF IT DOES NOT WORK
+1. no chip after drop: drop onto the chat INPUT box, drag from the Explorer (not from an editor tab);
+   or type #file:docs/DATA_FORMAT.md instead
+2. Copilot ignores the file: new chat, ask first "Summarize the attached DATA_FORMAT.md" to prove it is read
+3. CSV looks wrong: tell Copilot the exact difference ("note with comma is not quoted") and attach the file again
+4. it changed too many files: Undo, and add "Change only js/utils.js and js/app.js" to the prompt
+5. context too big or answers drift: new chat, attach fewer files
+ 
+HOME TASK
+1. create docs/DESIGN_NOTES.md with your 4 brand colours and 1 font
+2. new chat, attach it, ask: Apply these design notes to css/styles.css using CSS variables.
+3. check that the css rules from Day 10 are still followed
+ 
+CHECK: learner attaches files by drag and drop, CSV export follows DATA_FORMAT.md, one acceptance item fixed.
+ 
