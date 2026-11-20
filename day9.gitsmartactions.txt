@@ -1,0 +1,62 @@
+Git & Smart Actions
+--------------------
+
+Task 1: Git Smart Commit
+--------------------------  
+- Go to the Source Control (Git) icon in VS Code.
+- Click Git Initialize. You will see the main branch at the bottom-left.
+- In the Commit message box, click Smart Action. It will generate a detailed commit message.
+- Click Commit.
+- Normally, changes should first be moved to the Staging Area and then committed. For now, we will commit directly.
+- Click Publish Branch.
+- If you are not logged in, VS Code will ask you to sign in to GitHub.
+- Select the repository type: Public or Private.
+- VS Code will create the GitHub repository and push the project, including the README.md file.
+Smart Commit Message:
+When code changes are made, Copilot analyzes the Git diff to understand the changes and automatically generates an appropriate commit message.
+Task 2: Explain Code Using Copilot
+- Select any code.
+- Right-click on the selected code.
+- Select Explain.
+- Copilot will explain the selected code.
+Best Practice: We generally do not work directly on the main branch. We create a separate branch, make changes, and then merge the changes into main.
+
+Task 3: Create Branch, Commit & Merge
+Step 1: Create a New Branch
+- Click the main branch name at the bottom-left.
+- Select Create New Branch.
+- Give the branch name:
+  date-picker
+- The new branch will appear at the bottom-left.
+Step 2: Add 7-Day Date Picker
+Prompt 1:
+Add clickable options to select dates from the past 7 days.
+
+Prompt 2:
+Add a cursor pointer for the dates and the date picker.
+
+Step 3: Commit Changes
+- Go to the Source Control (Git) icon.
+- Click Smart Action to generate the commit message.
+- Review the generated message.
+- Click Commit.
+The changes are now committed to the date-picker branch.
+Step 4: Switch Back to Main
+- Click the branch name at the bottom-left.
+- Select main.
+- Open the browser and verify that the changes are not visible on the main branch yet.
+Step 5: Merge Branch into Main
+- Make sure you are on the main branch.
+- Go to Source Control.
+- Open Repositories.
+- Select the DailyJournal repository.
+- Select Branches → Merge Branch.
+- Select date-picker.
+- The changes will now be merged into main.
+- Check the web page to verify the changes.
+Step 6: Sync Changes
+Sync Changes keeps your local repository synchronized with GitHub:
+- Pull → Gets changes made by other team members.
+- Push → Sends your local commits to GitHub.
+At the bottom-left, VS Code shows the number of changes to pull and push.
+Finally, go to GitHub and verify the branches, commits, commit messages, and code changes.
